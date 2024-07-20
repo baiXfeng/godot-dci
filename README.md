@@ -59,6 +59,9 @@ dci.add_callable("FlyLambda", func(ctx: dci_context, data):
 	assert(ctx.sender() is superman, "type not match!")
 	ctx.sender().fly()
 )
+dci.add_callable("SomeLambda", func(ctx: dci_context, data):
+	printt("context param:", data)
+)
 
 # data usage
 var man: Person = Person.new().with(dci)
@@ -71,4 +74,8 @@ man.cast("swimmer").swim() \
 man.cast("superman").execute("FlyContext")
 man.cast("superman").execute("FlyLambda")
 
+# context execute
+man.execute("SomeLambda", {
+	"msg": "hello world!"
+})
 ```
